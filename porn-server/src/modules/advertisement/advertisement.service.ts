@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Advertisement } from '../../entities/advertisement.entity';
 import { Sequelize } from 'sequelize-typescript';
+import { Op } from 'sequelize';
 import * as crypto from 'crypto';
 import * as path from 'path';
 
@@ -52,6 +53,20 @@ export class AdvertisementService {
     return this.advertisementModel.findAll({
       where: {
         is_active: true,
+        [Op.and]: [
+          {
+            [Op.or]: [
+              { start_date: null },
+              { start_date: { [Op.lte]: now } }
+            ]
+          },
+          {
+            [Op.or]: [
+              { end_date: null },
+              { end_date: { [Op.gte]: now } }
+            ]
+          }
+        ]
       },
       order: [
         ['priority', 'DESC'],

@@ -1,9 +1,11 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 import type { MenuProps } from "antd";
 import { Button, Layout, Menu, theme } from "antd";
+import { authAPI } from "@/lib/api";
 
 const { Header, Content, Sider } = Layout;
 
@@ -26,7 +28,7 @@ export default function AdminLayout({
     label: key,
     active: true,
     onClick: () => {
-      switch(key) {
+      switch (key) {
         case "회원관리":
           router.push("/admin");
           break;
@@ -55,10 +57,17 @@ export default function AdminLayout({
     }
   };
 
+  const handleLogout = () => {
+    authAPI.logout();
+    router.push("/login");
+  };
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider>
-        <div className="demo-logo-vertical" />
+        <div className="h-[60px] flex justify-center items-center">
+          <Image className="h-[60px]" src="/login-logo.png" alt="logo" width={149} height={63} />
+        </div>
         <Menu
           theme="dark"
           defaultSelectedKeys={getInitialSelectedKeys()}
@@ -72,7 +81,7 @@ export default function AdminLayout({
           style={{ padding: 0, background: colorBgContainer }}
         >
           <div className="mr-[20px]">
-            <Button color="primary" variant="text">
+            <Button color="primary" variant="text" onClick={() => handleLogout()}>
               Logout
             </Button>
           </div>

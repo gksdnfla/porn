@@ -116,7 +116,7 @@ export default function AdvertisementManagement() {
       key: "start_date",
       width: 100,
       render: (date: number) => {
-        return new Date(date).toLocaleDateString("ko-KR");
+        return date ? new Date(date).toLocaleDateString("ko-KR") : "-";
       },
       sorter: (a: any, b: any) =>
         new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
@@ -127,7 +127,7 @@ export default function AdvertisementManagement() {
       key: "end_date",
       width: 100,
       render: (date: number) => {
-        return new Date(date).toLocaleDateString("ko-KR");
+        return date ? new Date(date).toLocaleDateString("ko-KR") : "-";
       },
       sorter: (a: any, b: any) =>
         new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
@@ -217,14 +217,6 @@ export default function AdvertisementManagement() {
       messageApi.error("우선순위를 입력해주세요.");
       return;
     }
-    if (!startDate) {
-      messageApi.error("광고 시작일을 입력해주세요.");
-      return;
-    }
-    if (!endDate) {
-      messageApi.error("광고 종료일을 입력해주세요.");
-      return;
-    }
     if (defaultAdvertisementImageList.length === 0) {
       messageApi.error("광고 이미지를 추가해주세요.");
       return;
@@ -238,8 +230,8 @@ export default function AdvertisementManagement() {
           link_url: link,
           priority: priority,
           is_active: isActive,
-          start_date: startDate?.toDate() || null,
-          end_date: endDate?.toDate() || null,
+          start_date: startDate?.toDate() || undefined,
+          end_date: endDate?.toDate() || undefined,
         });
         messageApi.success("광고가 수정되었습니다.");
       } else {
@@ -249,8 +241,8 @@ export default function AdvertisementManagement() {
           link_url: link,
           priority: priority,
           is_active: isActive,
-          start_date: startDate?.toDate() || null,
-          end_date: endDate?.toDate() || null,
+          start_date: startDate?.toDate() || undefined,
+          end_date: endDate?.toDate() || undefined,
         });
         messageApi.success("광고가 추가되었습니다.");
       }

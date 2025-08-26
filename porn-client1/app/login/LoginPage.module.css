@@ -1,26 +1,17 @@
 .input {
     height: 44px;
     background-color: #2A2A2A !important;
-    margin-bottom: 10px;
-    border: none;
-    color: #fff;
-    box-shadow: none !important;
-}
-
-.passwordInput {
-    height: 44px;
-    background-color: #2A2A2A !important;
-    margin-bottom: 10px;
-    border: none;
-    color: #fff;
+    margin-bottom: 10px !important;
+    border: none !important;
+    color: #fff !important;
     box-shadow: none !important;
 }
 
 .input::placeholder {
-    color: #989898
+    color: #989898 !important;
 }
 
-.passwordInput input::placeholder {
+.input input::placeholder {
     color: #989898;
 }
 

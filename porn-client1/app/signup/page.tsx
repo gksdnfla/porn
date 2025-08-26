@@ -4,6 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Input, Checkbox, Button } from "antd";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 
 // Styles
 import styles from "./SignupPage.module.css";
@@ -20,15 +21,28 @@ export default function SignupPage() {
           height={63}
         />
         <Input className={styles.input} placeholder="아이디를 입력해주세요." />
-        <Input
+        <Input.Password
           className={styles.input}
-          type="password"
           placeholder="비밀번호를 입력해주세요."
+          iconRender={(visible) =>
+            visible ? (
+              <EyeOutlined style={{ color: "#fff" }} />
+            ) : (
+              <EyeInvisibleOutlined style={{ color: "#fff" }} />
+            )
+          }
         />
-        <Input
+        <Input.Password
           className={styles.input}
           type="password"
           placeholder="비밀번호를 재 입력해주세요."
+          iconRender={(visible) =>
+            visible ? (
+              <EyeOutlined style={{ color: "#fff" }} />
+            ) : (
+              <EyeInvisibleOutlined style={{ color: "#fff" }} />
+            )
+          }
         />
         <Input className={styles.input} placeholder="닉네임을 입력해주세요." />
         <Input

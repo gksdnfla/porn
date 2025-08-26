@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Input, Checkbox, Button, message } from "antd";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 
 // Contexts
 import { useAuth } from "@/contexts/AuthContext";
@@ -149,12 +150,19 @@ export default function LoginPage() {
         />
 
         <Input.Password
-          className={styles.passwordInput}
+          className={styles.input}
           placeholder="비밀번호를 입력해주세요."
           value={form.password}
           onChange={(e) => handleInputChange("password", e.target.value)}
           onKeyPress={handleKeyPress}
           disabled={loading}
+          iconRender={(visible) =>
+            visible ? (
+              <EyeOutlined style={{ color: "#fff" }} />
+            ) : (
+              <EyeInvisibleOutlined style={{ color: "#fff" }} />
+            )
+          }
         />
 
         <div className="w-full flex justify-between items-center mb-[30px]">
